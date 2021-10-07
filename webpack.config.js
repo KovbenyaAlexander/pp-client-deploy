@@ -4,29 +4,33 @@ const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtract = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 const devServer = (develop) => {
-  return develop ? {
-    devServer:{
-      port: 3000,
-      open: true,
-    }
-  } : {};
-}
+  return develop
+    ? {
+        devServer: {
+          port: 3000,
+          open: true,
+        },
+      }
+    : {};
+};
 
 const eslint = (develop) => {
-  return develop ? [] : [ new ESLintPlugin({ extensions: ['ts', 'js', 'tsx'] }) ];
-}
+  return develop ? [] : [];
+};
 
 const definePlugin = (isDev) => {
-  const mode = isDev ? 'development' : 'production';
-  return [new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(mode)
-  })];
-}
+  const mode = isDev ? "development" : "production";
+  return [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(mode),
+    }),
+  ];
+};
 
-module.exports = ({develop}) => ({
+module.exports = ({ develop }) => ({
   entry: {
     main: "./src/client/index.tsx",
   },
@@ -68,5 +72,5 @@ module.exports = ({develop}) => ({
     }),
     new CleanWebpackPlugin(),
   ],
-  ...devServer(develop)
-})
+  ...devServer(develop),
+});
