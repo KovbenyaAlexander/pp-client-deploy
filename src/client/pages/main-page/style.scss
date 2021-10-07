@@ -1,0 +1,54 @@
+.main-page {
+  &__logo-container{
+    font-family: 'Rock Salt';
+    font-size: 35px;
+    margin: 30px;
+  }
+
+  &__logo{
+    display: inline;
+  }
+
+  &__logo-red{
+    display: inline;
+    color: red
+  }
+
+  &__wrapper {
+    width: 50%;
+    min-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+    margin-top: 10px;
+  }
+
+  &__separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__connect {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__separator{
+    font-family: 'Rock Salt';
+    display: inline;
+    &-wrapper{
+      display: flex;
+      justify-content: center;
+    }
+    &-red{
+      color: red
+    }
+  }
+
+  &__description{
+    font-size: 25px;
+    font-family: "Ubuntu", sans-serif;
+  }
+}
+
+

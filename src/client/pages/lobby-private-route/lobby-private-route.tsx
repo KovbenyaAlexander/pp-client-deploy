@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Route, useParams } from 'react-router';
+import {
+  Redirect, Route, useHistory, useParams,
+} from 'react-router';
 import { userJoin } from '../../store/thunk';
 import { IStore } from '../../types';
-import GamePage from '../game-page/game-page';
 import Lobby from '../lobby/lobby';
 
 export default function LobbyPrivateRoute(): JSX.Element {
   const { loading, game } = useSelector((state: IStore) => state);
   const { gameID } = useParams<{ gameID: string }>();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(userJoin(gameID));
@@ -20,8 +22,13 @@ export default function LobbyPrivateRoute(): JSX.Element {
       return (<></>);
     }
     if (game.id) {
-      return game.isActive ? <GamePage /> : <Lobby />;
+      if (game.isActive && !game.isCompleted) {
+        history.push(`/game/${gameID}`);
+      }
+      if (game.isCompleted) history.push(`/result/${gameID}`);
+      return <Lobby />;
     }
+
     return <Redirect to="/" />;
   }
 

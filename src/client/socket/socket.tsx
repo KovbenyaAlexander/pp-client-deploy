@@ -2,7 +2,7 @@ import io, { Socket } from 'socket.io-client';
 import { SetSocketApi } from '../store/actions';
 import { store } from '../store/store';
 import { IExclude, IGame, IUserInfo } from '../types';
-import { ISocketApi } from '../types/store-types';
+import { ISocketApi, IStory } from '../types/store-types';
 import {
   onSocketCancelGame,
   onSocketClose,
@@ -16,6 +16,10 @@ import {
   onSocketUpdateExcluding,
   onSocketUpdateMembers,
   onSocketUpdateChatMessages,
+  onSocketStartRound,
+  onSocketAddStory,
+  onSocketUpdateStories,
+  onSocketFinishGame,
 } from './socket-actions';
 
 export class SocketApi implements ISocketApi {
@@ -57,6 +61,12 @@ export class SocketApi implements ISocketApi {
     this.socket.on('refreshGame', onSocketRefreshGame.bind(this));
     this.socket.on('cancelGame', onSocketCancelGame);
     this.socket.on('close', onSocketClose);
+    this.socket.on('startRound', onSocketStartRound);
+    this.socket.on('stopRound', onSocketStartRound);
+    this.socket.on('addStory', onSocketAddStory);
+    this.socket.on('setStory', onSocketUpdateStories);
+    this.socket.on('finishStory', onSocketUpdateStories);
+    this.socket.on('finishGame', onSocketFinishGame);
   }
 
   initExclude(excludeObj: IExclude | undefined, isDealer: boolean): void {
@@ -76,5 +86,43 @@ export class SocketApi implements ISocketApi {
   sendMessage(message: string, authorMessage: string): void {
     const { game, user } = store.getState();
     this.socket.emit('sendMessage', game.id, user.userID, message, authorMessage);
+  }
+
+  // Game Actions
+  setCard(n: number | string): void {
+    const { game, user } = store.getState();
+    this.socket.emit('setCard', game.id, user.userID, n);
+  }
+
+  startRound(): void {
+    const { game } = store.getState();
+    this.socket.emit('startRound', game.id);
+  }
+
+  stopRound(): void {
+    const { game } = store.getState();
+    this.socket.emit('stopRound', game.id);
+  }
+
+  // Story Action
+
+  addStory(story: IStory): void {
+    const { game } = store.getState();
+    this.socket.emit('addStory', game.id, story);
+  }
+
+  setStory(storyID: string): void {
+    const { game } = store.getState();
+    this.socket.emit('setStory', game.id, storyID);
+  }
+
+  finishStory(result: number | string): void {
+    const { game } = store.getState();
+    this.socket.emit('finishStory', game.id, result);
+  }
+
+  finishGame(result: IStory[] | string | number): void {
+    const { game } = store.getState();
+    this.socket.emit('finishGame', game.id, result);
   }
 }

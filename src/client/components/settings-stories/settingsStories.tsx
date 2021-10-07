@@ -40,8 +40,8 @@ export const Stories = ({
               </p>
             )}
 
-            <button type="button" onClick={() => editStoryHandler(story)}>Edit</button>
-            <button type="button" onClick={() => removeStoryHandler(story.id)}>Remove</button>
+            <button type="button" className="button button_red" onClick={() => editStoryHandler(story)}>Edit</button>
+            <button type="button" className="button button_red" onClick={() => removeStoryHandler(story.id)}>Remove</button>
           </div>
         ))}
       </div>

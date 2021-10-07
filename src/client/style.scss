@@ -1,18 +1,72 @@
-*{
+@import './variables.scss';
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.btn {
+
+.button {
   padding: 5px;
   font-size: 1.2rem;
   border-radius: 5px;
-  border: none;
-  outline: none;
+  background-color: rgba(255, 255, 255, 0);
 
-  &_active{
-    background-color: rgb(110, 148, 243);
+  outline: none;
+  font-family: "Ubuntu", sans-serif;
+
+  &_red {
+    border: 5px solid $buttonRed;
+
+    &_active {
+      background-color: $buttonRedActive;
+    }
+
+    &:hover {
+      background-color: $buttonRedHover;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      border: none;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0);
+      }
+    }
+  }
+
+  &_green {
+    border: 5px solid $buttonGreen;
+    &_active {
+      background-color: $buttonGreenActive;
+    }
+
+    &:hover {
+      background-color: $buttonGreenHover;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      border: none;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0);
+        cursor: unset;
+      }
+    }
   }
 }
 
+.input{
+  font-family: "Ubuntu", sans-serif;
+  height: 40px;
+  padding: 5px;
+  border-radius: 2px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #787777;
+}

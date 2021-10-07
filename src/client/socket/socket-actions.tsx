@@ -9,7 +9,7 @@ import {
 } from '../store/actions';
 import { store } from '../store/store';
 import {
-  IExclude, ISettings, IUserInfo, IChatMessage, IGame,
+  IExclude, ISettings, IUserInfo, IChatMessage, IGame, IStory,
 } from '../types/store-types';
 
 export function onSocketUpdateMembers(members: IUserInfo[]): void {
@@ -60,4 +60,36 @@ export function onSocketCancelGame(): void {
 export function onSocketClose(): void {
   sessionStorage.clear();
   store.dispatch(setInitialStore());
+}
+
+export function onSocketStartRound(isRoundActive: boolean): void {
+  const { game, user } = store.getState();
+  store.dispatch(SetGame({ ...game, isRoundActive }));
+  store.dispatch(UpdateUser({ ...user, choose: undefined }));
+}
+
+export function onSocketStopRound(isRoundActive: boolean): void {
+  const { game } = store.getState();
+  store.dispatch(SetGame({ ...game, isRoundActive }));
+}
+
+export function onSocketAddStory(story: IStory): void {
+  const { game } = store.getState();
+  store.dispatch(UpdateSettings({ ...game.settings, stories: [...game.settings.stories, { ...story }] }));
+}
+
+export function onSocketUpdateStories(stories: IStory[]): void {
+  const { game } = store.getState();
+  store.dispatch(UpdateSettings({ ...game.settings, stories: [...stories] }));
+}
+
+export function onSocketFinishGame(result: IStory[] | string | number): void {
+  let { game } = store.getState();
+  if (Array.isArray(result) && result.length) {
+    store.dispatch(UpdateSettings({ ...game.settings, stories: [...result] }));
+  } else {
+    store.dispatch(UpdateSettings({ ...game.settings, gameResult: result }));
+  }
+  ({ game } = store.getState());
+  store.dispatch(SetGame({ ...game, isCompleted: true }));
 }

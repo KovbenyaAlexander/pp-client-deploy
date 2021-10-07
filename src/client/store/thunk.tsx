@@ -3,11 +3,11 @@ import { AnyAction } from 'redux';
 import axios from 'axios';
 import { IStore, IGame } from '../types';
 import {
-  setInitialStore, SetGame, SetSocketApi, SetIsLoading,
+  setInitialStore, SetGame, SetSocketApi, SetIsLoading, SetChoosenCard,
 } from './actions';
 import { SocketApi } from '../socket/socket';
 
-const url = 'https://morning-gorge-61773.herokuapp.com/api';
+const url = 'https://vast-peak-99290.herokuapp.com/api';
 
 export function createGame(settings: IGame) {
   return async (
@@ -29,8 +29,10 @@ export function createGame(settings: IGame) {
           excluding: {
             isActive: false,
           },
+          isRoundActive: false,
+          isCompleted: false,
         };
-        const socket = new SocketApi('https://morning-gorge-61773.herokuapp.com', user, game);
+        const socket = new SocketApi('https://vast-peak-99290.herokuapp.com', user, game);
         dispatch(SetSocketApi(socket));
         dispatch(SetGame(game));
       }
@@ -119,7 +121,7 @@ export function userJoin(id: string) {
       });
       if (response.status === 200) {
         if (user.role !== 'dealer') {
-          const newSocket = new SocketApi('https://morning-gorge-61773.herokuapp.com', user, response.data.game);
+          const newSocket = new SocketApi('https://vast-peak-99290.herokuapp.com', user, response.data.game);
           dispatch(SetSocketApi(newSocket));
         }
         dispatch(SetGame(response.data.game));
@@ -129,10 +131,25 @@ export function userJoin(id: string) {
       const recconectID = sessionStorage.getItem('socketID');
       if (recconectID) {
         const { user, game } = getState();
-        const socket = new SocketApi('https://morning-gorge-61773.herokuapp.com', user, game, recconectID);
+        const socket = new SocketApi('https://vast-peak-99290.herokuapp.com', user, game, recconectID);
       }
       console.log(e);
       dispatch(SetIsLoading(false));
+    }
+  };
+}
+
+export function setCard(number: number | string) {
+  return async (
+    dispatch: ThunkDispatch<void, IStore, AnyAction>,
+    getState: () => IStore,
+  ): Promise<void> => {
+    try {
+      const { socket } = getState();
+      socket?.setCard(number);
+      dispatch(SetChoosenCard(number));
+    } catch (e) {
+      console.log(e);
     }
   };
 }

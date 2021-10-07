@@ -41,6 +41,10 @@ export const LoginPopap = ({ onClose, onSubmit, isDealer }: ILoginPopap):JSX.Ele
     }
   }, [userForm.name]);
 
+  function onObserverChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    setUserForm((prev) => ({ ...prev, role: e.target.checked ? 'observer' : 'player' }));
+  }
+
   return (
     <div className="login_popap">
       <div className="login_popap-wrapper">
@@ -75,7 +79,6 @@ export const LoginPopap = ({ onClose, onSubmit, isDealer }: ILoginPopap):JSX.Ele
               value={userForm.name}
               onChange={(e) => setUserForm({ ...userForm, name: e.target.value })}
             />
-            <p>{!isFormValid && 'Wrong data..'}</p>
           </label>
 
           <label htmlFor="lastName">
@@ -104,15 +107,15 @@ export const LoginPopap = ({ onClose, onSubmit, isDealer }: ILoginPopap):JSX.Ele
           {!isDealer && (
             <label htmlFor="isRole">
               <p>You observer?</p>
-              <input type="checkbox" name="isRole" id="isRole" />
+              <input type="checkbox" name="isRole" id="isRole" onChange={onObserverChange} />
             </label>
           )}
           <div className="btn_wrapper">
-            <button type="submit" disabled={!isFormValid}>
-              Check Button
+            <button type="submit" disabled={!isFormValid} className="button button_green">
+              GO
             </button>
 
-            <button type="button" onClick={onClose}>
+            <button type="button" onClick={onClose} className="button button_red">
               Cancel
             </button>
           </div>

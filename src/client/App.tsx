@@ -7,6 +7,7 @@ import NotFound from './pages/404/404';
 import Header from './components/header/header';
 import './style.scss';
 import LobbyPrivateRoute from './pages/lobby-private-route/lobby-private-route';
+import ResultsPage from './pages/results/results';
 
 const App = (): JSX.Element => (
   <>
@@ -16,6 +17,7 @@ const App = (): JSX.Element => (
         <Route
           exact
           path={['/', '/connect/:gameId']}
+          // eslint-disable-next-line react/jsx-props-no-spreading
           render={(props) => <MainPage {...props} />}
         />
 
@@ -30,7 +32,9 @@ const App = (): JSX.Element => (
         <Route path="/settings">
           <SettingsPage />
         </Route>
-
+        <Route path="/result/:id">
+          <ResultsPage />
+        </Route>
         <Route path="*">
           <NotFound />
         </Route>

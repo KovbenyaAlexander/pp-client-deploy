@@ -47,7 +47,7 @@ export default function StoryPopup({ setShouldShowPopup, storyToEdit, onPopupSub
     <div className="story-popup">
       <form onSubmit={(e) => submitHandler(e)} className="story-popup-wrapper">
 
-        <div className="popup__name">
+        <div className="story-popup__name">
           <p>Story name:*</p>
           <input
             type="text"
@@ -55,9 +55,11 @@ export default function StoryPopup({ setShouldShowPopup, storyToEdit, onPopupSub
             onChange={(e) => setName(e.target.value)}
             maxLength={30}
           />
+          {errorValidation && <span className="story-popup__validation-error">name length must be more than 2 characters and less than 30</span>}
+
         </div>
 
-        <div className="popup__description">
+        <div className="story-popup__description">
           <p>Story description:</p>
           <textarea
             value={description}
@@ -67,10 +69,11 @@ export default function StoryPopup({ setShouldShowPopup, storyToEdit, onPopupSub
           />
         </div>
 
-        {errorValidation && <span className="story-popup__validation-error">name length must be more than 2 characters and less than 30</span>}
-        <br />
-        <button type="submit">Submit</button>
-        <button type="button" onClick={() => setShouldShowPopup(false)}>Close</button>
+        <div className="story-popup__submit-wrapper">
+          <button type="submit" className="button button_green">Add story</button>
+          <button type="button" className="button button_red" onClick={() => setShouldShowPopup(false)}>Cancel</button>
+        </div>
+
       </form>
     </div>
 

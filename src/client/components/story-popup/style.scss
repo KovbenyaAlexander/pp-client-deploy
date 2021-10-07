@@ -1,4 +1,4 @@
-.story-popup{
+.story-popup {
   width: 100%;
   height: 100%;
 
@@ -14,19 +14,45 @@
     width: 500px;
     height: 350px;
     margin-top: 5rem;
-    padding: 3rem 1rem;
     border-radius: 10px;
     background-color: white;
   }
-}
 
-.story-popup{
-  &__validation-error{
-    color: red
+  &__validation-error {
+    position: relative;
+    bottom: 0;
+    color: red;
   }
 
-  input{
-    width: 90%;
-    margin: 0 auto;
+  &__name {
+    height: 70px;
+  }
+
+  &__name,
+  &__description {
+    width: 80%;
+    margin: 15px auto;
+  }
+
+  &__submit-wrapper {
+    display: flex;
+    justify-content: space-around;
+    bottom: 10px;
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    resize: none;
+    height: 100px;
+  }
+
+  p,
+  span {
+    text-align: center;
   }
 }

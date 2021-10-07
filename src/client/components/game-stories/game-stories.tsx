@@ -12,6 +12,7 @@ export default function GameStories(): JSX.Element {
   const dispatch = useDispatch();
   const game = useSelector((state:IStore) => state.game);
   const user = useSelector((state:IStore) => state.user);
+  const socket = useSelector((state: IStore) => state.socket);
   const { settings } = game;
   const [shouldShowPopupForAdd, setShouldShowPopupForAdd] = useState(false);
 
@@ -21,7 +22,12 @@ export default function GameStories(): JSX.Element {
 
   const onPopupSubmit = (newStory: IStory) => {
     setShouldShowPopupForAdd(false);
-    dispatch(updateSettings({ ...game, settings: { ...settings, stories: [...settings.stories, { ...newStory, id: uuidv4() }] } }));
+    const id = uuidv4();
+    socket?.addStory({ ...newStory, id });
+    // dispatch(updateSettings({
+    //   ...game,
+    //   settings: { ...settings, stories: [...settings.stories, { ...newStory, id }] },
+    // }));
   };
 
   const chooseStoryHandler = (activeStory: IStory) => {
@@ -37,8 +43,8 @@ export default function GameStories(): JSX.Element {
         isActive: false,
       };
     });
-
-    dispatch(updateSettings({ ...game, settings: { ...settings, stories: newStories } }));
+    socket?.setStory(activeStory.id);
+    // dispatch(updateSettings({ ...game, settings: { ...settings, stories: newStories } }));
   };
 
   return (
@@ -54,7 +60,15 @@ export default function GameStories(): JSX.Element {
             description:
             {story.description}
           </p>
-          {user.role === 'dealer' && <button type="button" onClick={() => chooseStoryHandler(story)}> Choose this story</button>}
+          {user.role === 'dealer' && !game.isRoundActive && !story.estimation && (
+            <button
+              type="button"
+              onClick={() => chooseStoryHandler(story)}
+            >
+              {' '}
+              Choose this story
+            </button>
+          )}
           {story.isCompleted ? (
             <p>
               {' '}

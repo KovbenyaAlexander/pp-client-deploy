@@ -3,10 +3,11 @@ import { Socket } from 'socket.io-client/build/socket';
 export interface IUserInfo {
   name: string;
   userID: string;
-  lastName?: string
-  jobPosition?: string
-  photoUser?: string
-  role?: string
+  lastName?: string;
+  jobPosition?: string;
+  photoUser?: string;
+  role?: string;
+  choose?: number | string;
 }
 
 export interface IStory{
@@ -17,6 +18,7 @@ export interface IStory{
   isCompleted: boolean,
   isActive: boolean,
 }
+
 export interface ISettings {
   gameName: string;
   isDealerInGame: boolean;
@@ -26,7 +28,8 @@ export interface ISettings {
   estimationType: string;
   isTimerRequired: boolean;
   timerValue: string;
-  stories: Array<IStory>
+  stories: Array<IStory>;
+  gameResult?: IStory[] | number | string;
 }
 
 export interface IExclude {
@@ -40,9 +43,11 @@ export interface IExclude {
 export interface IGame {
   id?: string | null;
   isActive: boolean;
+  isRoundActive: boolean;
   members: IUserInfo[];
   excluding: IExclude;
   settings: ISettings;
+  isCompleted: boolean;
 }
 export interface IStore {
   user: IUserInfo;
@@ -60,7 +65,14 @@ export interface ISocketApi {
   initExclude: (e: IExclude | undefined, d: boolean) => void;
   confirmExclude: (a: boolean) => void;
   close: () => void;
-  sendMessage: (message: string, authorMessage: string)=>void
+  setCard: (n: number | string) => void;
+  sendMessage: (message: string, authorMessage: string)=>void;
+  startRound: () => void;
+  stopRound: () => void;
+  addStory: (s: IStory) => void;
+  setStory: (s: string) => void;
+  finishStory: (r: number | string) => void;
+  finishGame: (r: IStory[] | number | string) => void;
 }
 
 export interface IChatMessage {

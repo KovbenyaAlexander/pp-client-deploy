@@ -13,6 +13,7 @@ export enum Actions {
   SET_SOCKETAPI = 'SET_SOCKETAPI',
   UPDATE_CHAT_MESSAGES = 'UPDATE_CHAT_MESSAGES',
   SET_IS_LOADING = 'SET_IS_LOADING',
+  SET_CHOOSEN_CARD = 'SET_CHOOSEN_CARD',
 }
 
 // Game Actions
@@ -48,6 +49,11 @@ export interface UpdateChatMessagesAction {
 export interface SetIsLoadingAction {
   type: Actions.SET_IS_LOADING;
   payload: boolean;
+}
+
+export interface SetChoosenCardAction {
+  type: Actions.SET_CHOOSEN_CARD;
+  payload: number | string;
 }
 
 export type GameActions = SetGameAction | StartExcludeAction | StopExcludeAction;

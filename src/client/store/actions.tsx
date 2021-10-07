@@ -12,6 +12,7 @@ import {
   IChatMessage,
   UpdateChatMessagesAction,
   SetIsLoadingAction,
+  SetChoosenCardAction,
 } from '../types';
 import { ISocketApi } from '../types/store-types';
 import { AllActions } from './reducers';
@@ -80,6 +81,13 @@ export function UpdateChatMessages(payload: IChatMessage): UpdateChatMessagesAct
 export function SetIsLoading(payload: boolean): SetIsLoadingAction {
   return {
     type: Actions.SET_IS_LOADING,
+    payload,
+  };
+}
+
+export function SetChoosenCard(payload: number | string): SetChoosenCardAction {
+  return {
+    type: Actions.SET_CHOOSEN_CARD,
     payload,
   };
 }

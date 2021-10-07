@@ -1,0 +1,29 @@
+.card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0 10px;
+  width: 100px;
+  height: 80%;
+  background: white;
+  border: 1px solid black;
+  border-radius: 2px;
+
+  &__pointer{
+    padding: 2px;
+
+    &_upper{
+      align-self: flex-start;
+    }
+
+    &_lower{
+      align-self: flex-end;
+    }
+  }
+
+  &_selected{
+    background-color: red;
+  }
+}

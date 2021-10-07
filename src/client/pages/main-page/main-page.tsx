@@ -8,8 +8,8 @@ import { LoginPopap } from '../../components/login-popap/login-popap';
 import { isGameActive } from '../../store/thunk';
 import { AppDispatch } from '../../types/middleware-types';
 import { UpdateUser } from '../../store/actions';
-import './style.scss';
 import { IStore } from '../../types/store-types';
+import './style.scss';
 
 const MainPage = (props: any): ReactElement => {
   const dispatch: AppDispatch = useDispatch();
@@ -83,26 +83,43 @@ const MainPage = (props: any): ReactElement => {
       {shouldShowLogin && !dealerLogin && (
         <LoginPopap onClose={onPopUpClose} onSubmit={onLoginPlayer} />
       )}
-      <section>
-        <button type="button" onClick={onNewGame}>Create new game</button>
-      </section>
-      <h2 className="main-page__separator">OR</h2>
 
-      <section>
-        <p>Connect to lobby by URL: </p>
-        <form onSubmit={(e) => onPlay(e)}>
-          <input
-            type="text"
-            value={keyID}
-            onChange={(e) => setKeyID(e.target.value)}
-          />
+      <div className="main-page__logo-container">
+        <h1 className="main-page__logo">Pointing</h1>
+        <h1 className="main-page__logo-red">Poker</h1>
+      </div>
 
-          <button type="submit">
-            Play
-          </button>
-        </form>
-      </section>
-      {isGameFound === false && <p>Game not found</p>}
+      <div className="main-page__wrapper">
+
+        <section className="main-page__new-game">
+          <p className="main-page__description">Start on your own</p>
+          <button className="button button_green" type="button" onClick={onNewGame}>Create new game</button>
+        </section>
+
+        <div className="main-page__separator-wrapper">
+          <h2 className="main-page__separator">O</h2>
+          <h2 className="main-page__separator main-page__separator-red">R</h2>
+        </div>
+
+        <section className="main-page__connect">
+          <form onSubmit={(e) => onPlay(e)}>
+            <input
+              className="main-page__connect-input input"
+              type="text"
+              value={keyID}
+              onChange={(e) => setKeyID(e.target.value)}
+              placeholder="Input id for the game"
+            />
+            <button type="submit" className="button button_red">
+              Play
+            </button>
+
+            {isGameFound === false && <p>Game not found</p>}
+
+          </form>
+        </section>
+      </div>
+
     </article>
   );
 };

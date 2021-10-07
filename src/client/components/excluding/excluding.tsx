@@ -33,6 +33,7 @@ export default function Exluding(): JSX.Element {
           e.preventDefault();
           handleConfirm();
         }}
+        className="button button_green"
       >
         Yes
       </button>
@@ -42,6 +43,7 @@ export default function Exluding(): JSX.Element {
           e.preventDefault();
           await handleCancel();
         }}
+        className="button button_red"
       >
         No
       </button>

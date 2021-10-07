@@ -1,0 +1,17 @@
+.results-cards{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+
+  .card{
+    width: 30px;
+    height: 50%;
+  }
+
+  &__card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
