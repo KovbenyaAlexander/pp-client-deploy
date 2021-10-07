@@ -1,0 +1,15 @@
+.lobby{
+  display: flex;
+  flex-direction: column;
+  
+  &__title{
+    font-size: 3em;
+    text-align: center;
+  }
+
+  &__chat{
+    display: flex;
+    margin: 30px 0;
+    justify-content: space-between;
+  }
+}

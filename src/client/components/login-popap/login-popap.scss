@@ -1,0 +1,47 @@
+.login_popap{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba($color: #000000, $alpha: 0.5);
+
+  &-wrapper {
+    height: 350px;
+    margin-top: 5rem;
+    padding: 3rem 1rem;
+    border-radius: 10px;
+    background-color: white;
+    form{
+      .photo_user-wrapper {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          border: 2px solid black;
+          label{
+            cursor: pointer;
+          }
+  
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+          }
+    
+        input {
+          display: none;
+        }
+      }
+      .btn_wrapper {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    
+  }
+}

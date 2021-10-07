@@ -1,0 +1,14 @@
+.stories-container{
+  padding: 5px;
+
+}
+
+.story{
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid grey;
+
+  &__name, &__description{
+    color: green;
+  }
+}

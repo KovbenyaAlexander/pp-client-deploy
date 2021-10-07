@@ -1,0 +1,49 @@
+.chat{
+  &__messages{
+    background-color: rgb(228, 222, 201);
+    height: 500px;
+    overflow-y: scroll;
+  
+    &-service{
+
+      display: flex;
+      justify-content: end;
+  
+      .message__container {
+        background-color: gold;
+        padding: 5px;
+        margin: 5px;
+        max-width: 90%;
+        overflow: hidden;
+        border-radius: 15px 0px 15px 15px;
+      }
+    }
+
+    &-left{
+      display: flex;
+      justify-content: start;
+      .message__container {
+        border-radius: 15px 15px 15px 0px;
+        background-color: aqua;
+        padding: 5px;
+        margin: 5px;
+        max-width: 90%;
+        overflow: hidden;
+      }
+    }
+  
+    &-right{
+      display: flex;
+      justify-content: end;
+  
+      .message__container {
+        background-color: aqua;
+        padding: 5px;
+        margin: 5px;
+        max-width: 90%;
+        overflow: hidden;
+        border-radius: 15px 0px 15px 15px;
+      }
+    }
+  }
+}
