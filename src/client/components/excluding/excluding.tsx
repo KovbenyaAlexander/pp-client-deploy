@@ -20,33 +20,35 @@ export default function Exluding(): JSX.Element {
   }
 
   return (
-    <div>
-      <h3>
-        {`Exlude ${store.user?.name}`}
+    <div className="exclude">
+      <h3 className="exclude__title">
+        {`Exlude ${store.user?.name}?`}
       </h3>
-      <h4>
+      <h4 className="exclude__reason">
         {`Reason: ${store.reason}`}
       </h4>
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          handleConfirm();
-        }}
-        className="button button_green"
-      >
-        Yes
-      </button>
-      <button
-        type="button"
-        onClick={async (e) => {
-          e.preventDefault();
-          await handleCancel();
-        }}
-        className="button button_red"
-      >
-        No
-      </button>
+      <div className="exclude__buttons">
+        <button
+          className="button button_green button_medium"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            handleConfirm();
+          }}
+        >
+          Yes
+        </button>
+        <button
+          className="button button_red button_medium"
+          type="button"
+          onClick={async (e) => {
+            e.preventDefault();
+            await handleCancel();
+          }}
+        >
+          No
+        </button>
+      </div>
     </div>
   );
 }

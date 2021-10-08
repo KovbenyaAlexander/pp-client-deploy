@@ -1,12 +1,24 @@
+@import '../../variables.scss';
+
 .controller{
   display: flex;
   justify-content: space-between;
   
   &__input{
     width: 100%;
+    border-radius: 2px;
+    padding-left: 10px;
+    outline: none;
+    border: 1px solid $lightGrey;
+
+    &:focus{
+      border-color: black;
+    }
   }
 
-  &__submit{
-    padding: 5px 10px;
+  .button {
+    height: 35px;
+    padding: 0;
+    width: 150px;
   }
 }

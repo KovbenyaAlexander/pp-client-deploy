@@ -13,8 +13,9 @@ import {
   UpdateChatMessagesAction,
   SetIsLoadingAction,
   SetChoosenCardAction,
+  AddNewUserImageAction,
 } from '../types';
-import { ISocketApi } from '../types/store-types';
+import { ISocketApi, IUserImage } from '../types/store-types';
 import { AllActions } from './reducers';
 
 export function UpdateUser(payload: IUserInfo): AllActions {
@@ -89,5 +90,19 @@ export function SetChoosenCard(payload: number | string): SetChoosenCardAction {
   return {
     type: Actions.SET_CHOOSEN_CARD,
     payload,
+  };
+}
+
+export function AddUserImage(id: string, image: string): AddNewUserImageAction {
+  return {
+    type: Actions.ADD_NEW_USER_IMAGE,
+    payload: [{ id, image }],
+  };
+}
+
+export function AddUsersImages(arr : IUserImage[]): AddNewUserImageAction {
+  return {
+    type: Actions.ADD_NEW_USER_IMAGE,
+    payload: arr,
   };
 }

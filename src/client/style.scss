@@ -4,32 +4,47 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Ubuntu';
+  font-size: $commonText;
 }
 
 
 .button {
   padding: 5px;
-  font-size: 1.2rem;
+  font-size: $commonText;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0);
 
   outline: none;
   font-family: "Ubuntu", sans-serif;
+  width: 350px;
+  height: 85px;
+
+  &_medium{
+    width: 240px;
+  }
 
   &_red {
     border: 5px solid $buttonRed;
+    text-shadow: 0 0 2px $mainRed;
 
-    &_active {
+    &:active {
+      border-color: $activeRed;
       background-color: $buttonRedActive;
+      text-shadow: 0 0 2px $activeRed;
     }
 
     &:hover {
+      border-color: $secondaryRed;
       background-color: $buttonRedHover;
+      text-shadow: 0 0 2px $secondaryRed;
       cursor: pointer;
     }
 
     &:disabled {
-      border: none;
+      border-color: $lightGrey;
+      color: $lightGrey;
+      text-shadow: none;
       &:hover {
         background-color: rgba(255, 255, 255, 0);
       }
@@ -38,17 +53,25 @@
 
   &_green {
     border: 5px solid $buttonGreen;
-    &_active {
+    text-shadow: 0 0 2px $mainGreen;
+
+    &:active {
+      border-color: $activeGreen;
       background-color: $buttonGreenActive;
+      text-shadow: 0 0 2px $activeGreen;
     }
 
     &:hover {
+      border-color: $secondaryGreen;
       background-color: $buttonGreenHover;
+      text-shadow: 0 0 2px $secondaryGreen;
       cursor: pointer;
     }
 
     &:disabled {
-      border: none;
+      border-color: $lightGrey;
+      color: $lightGrey;
+      text-shadow: none;
       &:hover {
         background-color: rgba(255, 255, 255, 0);
         cursor: unset;
@@ -65,8 +88,45 @@
 
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: $commonText;
   line-height: 28px;
 
   color: #787777;
 }
+
+::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+  }
+
+::-webkit-scrollbar-button{
+    display: none;
+  }
+
+::-webkit-scrollbar-thumb{
+    background-color: $semiOpacityDark;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+
+    &:hover{
+      background-color: black;
+    }
+  }
+  
+::-webkit-scrollbar-track{
+    background-color: transparent;
+  }
+
+  .popup-std{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 66%;
+    height: 66%;
+    border-radius: 2px;
+    border: 5px solid;
+    padding: 10px;
+    background-color: #F4F4F4;
+  }

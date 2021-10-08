@@ -4,6 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useHistory } from 'react-router';
 import { cancelGame, activitySwitcher } from '../../store/thunk';
 import { IStore } from '../../types';
+import './style.scss';
 
 export default function Launch(): JSX.Element {
   const dispatch = useDispatch();
@@ -25,35 +26,34 @@ export default function Launch(): JSX.Element {
   };
 
   return (
-    <div className="settings-page">
+    <div className="launch">
       {id && (
         <>
-          <p>
-            Your name:
-            {name}
-          </p>
+          <div className="launch__item">
+            <p>GameId:</p>
+            <div className="launch__item-wrapper">
+              <input value={id} />
+              <CopyToClipboard
+                text={id}
+              >
+                <button className="button button_red launch-copy-btn" type="button">Copy</button>
+              </CopyToClipboard>
+            </div>
+          </div>
 
-          <p>
-            Room id:
-            {id}
-            <CopyToClipboard
-              text={id}
-            >
-              <button type="button">Copy id of game to clipboard</button>
-            </CopyToClipboard>
-          </p>
-          <p>
-            Link to game:
-            {`http://localhost:3000/#/connect/${id}`}
-            <CopyToClipboard
-              text={`http://localhost:3000/#/connect/${id}`}
-            >
-              <button type="button">Copy link to game to clipboard</button>
-            </CopyToClipboard>
+          <div className="launch__item">
+            <p>Game Link:</p>
+            <div className="launch__item-wrapper">
+              <input value={`https://kovbenyaalexander.github.io/pp-client-deploy/#/connect/${id}`} />
+              <CopyToClipboard
+                text={`https://kovbenyaalexander.github.io/pp-client-deploy/#/connect/${id}`}
+              >
+                <button className="button button_red launch-copy-btn" type="button">Copy</button>
+              </CopyToClipboard>
+            </div>
 
-          </p>
+          </div>
 
-          <button type="button" onClick={cancelGameHandler}>Cancel game</button>
         </>
       )}
 

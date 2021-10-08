@@ -1,15 +1,32 @@
+@import '../../variables.scss';
+
 .lobby{
   display: flex;
   flex-direction: column;
   
   &__title{
-    font-size: 3em;
+    font-size: $bigText;
     text-align: center;
+
+    span{
+      color: $mainRed;
+    }
   }
 
   &__chat{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
     margin: 30px 0;
-    justify-content: space-between;
+
+    .members{
+      grid-area: 1/1/2/6;
+    }
+
+    .chat{
+      grid-area: 1/6/2/13;
+      width: 100%;
+      max-width: none;
+    }
   }
 }

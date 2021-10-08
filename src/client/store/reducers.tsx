@@ -8,6 +8,7 @@ import {
   SetIsLoadingAction,
   SetChoosenCardAction,
   UpdateChatMessagesAction,
+  AddNewUserImageAction,
 } from '../types/actions-types';
 import {
   IUserInfo, IStore, ISettings,
@@ -20,7 +21,7 @@ export type AllActions =
   | { type: typeof Actions.SET_DEFAULT_SETTINGS }
   | StopExcludeAction | StartExcludeAction | SetGameAction
   | UpdateMembersAction | SetSocketAction | SetIsLoadingAction
-  | SetChoosenCardAction | UpdateChatMessagesAction;
+  | SetChoosenCardAction | UpdateChatMessagesAction | AddNewUserImageAction;
 
 export default function reducer(state: IStore = initialStore, action: AllActions) {
   switch (action.type) {
@@ -47,6 +48,8 @@ export default function reducer(state: IStore = initialStore, action: AllActions
       return { ...state, loading: action.payload };
     case Actions.SET_CHOOSEN_CARD:
       return { ...state, user: { ...state.user, choose: action.payload } };
+    case Actions.ADD_NEW_USER_IMAGE:
+      return { ...state, usersImages: [...state.usersImages, ...action.payload] };
     default:
       return state;
   }

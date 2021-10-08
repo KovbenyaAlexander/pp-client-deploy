@@ -1,0 +1,30 @@
+.launch{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 700px;
+  margin: 0 auto;
+
+
+  &-copy-btn{
+    height: 40px !important;
+    width: 200px !important;
+  }
+
+  &__item{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    &-wrapper{
+      width: 410px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  input{
+    width: 200px;
+  }
+}

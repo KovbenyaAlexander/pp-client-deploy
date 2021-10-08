@@ -1,5 +1,5 @@
 import {
-  ISocketApi, IUserInfo, IGame, IExclude, IChatMessage,
+  ISocketApi, IUserInfo, IGame, IExclude, IChatMessage, IUserImage,
 } from './store-types';
 
 export enum Actions {
@@ -14,6 +14,7 @@ export enum Actions {
   UPDATE_CHAT_MESSAGES = 'UPDATE_CHAT_MESSAGES',
   SET_IS_LOADING = 'SET_IS_LOADING',
   SET_CHOOSEN_CARD = 'SET_CHOOSEN_CARD',
+  ADD_NEW_USER_IMAGE = 'ADD_NEW_USER_IMAGE',
 }
 
 // Game Actions
@@ -54,6 +55,11 @@ export interface SetIsLoadingAction {
 export interface SetChoosenCardAction {
   type: Actions.SET_CHOOSEN_CARD;
   payload: number | string;
+}
+
+export interface AddNewUserImageAction {
+  type: Actions.ADD_NEW_USER_IMAGE;
+  payload: IUserImage[];
 }
 
 export type GameActions = SetGameAction | StartExcludeAction | StopExcludeAction;

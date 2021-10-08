@@ -8,11 +8,14 @@ import Score from '../score/score';
 import './style.scss';
 
 export default function Member({ member } : { member: IUserInfo }): JSX.Element {
-  const { game, user, socket } = useSelector((state: IStore) => state);
+  const {
+    game, user, socket, usersImages,
+  } = useSelector((state: IStore) => state);
   const dispatch = useDispatch();
-  const { userID, name, photoUser } = member;
+  const { userID, name } = member;
   const isDealerMember = isDealer(game, userID);
   const isExludable = !isDealerMember && !isCurrentUser(user, userID) && (game.members.length - 1) >= 3;
+  const photoUser = usersImages.find((ent) => ent.id === userID);
 
   function handleExcludeInit(): void {
     const exclude: IExclude = {
@@ -29,19 +32,20 @@ export default function Member({ member } : { member: IUserInfo }): JSX.Element 
   return (
     <>
       <li className="member">
-        <Avatar name={name} imgSrc={photoUser} />
+        <Avatar name={name} imgSrc={photoUser ? photoUser.image : ''} />
         <h4 className="member__name">{ name }</h4>
         {member.role !== 'player'
       && <h3 className={`member__special member__special_${member.role}`}>{`${member.role}`}</h3>}
         { ((user.role === 'dealer' && !isDealerMember) || isExludable) && (
           <button
+            className="button button_red"
             type="button"
             onClick={(e) => {
               e.preventDefault();
               handleExcludeInit();
             }}
           >
-            Exclude
+            Kick
           </button>
         ) }
       </li>

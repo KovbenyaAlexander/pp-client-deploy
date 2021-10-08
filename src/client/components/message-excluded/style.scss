@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.message-excluded{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__reason{
+    font-size: $mediumText;
+    margin-top: 40px;
+  }
+
+  &__next-action{
+    font-size: $commonText;
+    margin-top: 20px;
+  }
+}

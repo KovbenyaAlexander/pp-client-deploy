@@ -31,17 +31,22 @@ export const Stories = ({
           <div className="story" key={story.id}>
             <p className="story__name">
               name:
+              {' '}
               {story.name}
             </p>
             {story.description && (
               <p className="story__description">
                 description:
+                {' '}
                 {story.description}
               </p>
             )}
 
-            <button type="button" className="button button_red" onClick={() => editStoryHandler(story)}>Edit</button>
-            <button type="button" className="button button_red" onClick={() => removeStoryHandler(story.id)}>Remove</button>
+            <div className="stories__controller">
+              <button type="button" className="button button_red" onClick={() => editStoryHandler(story)}>Edit</button>
+              <button type="button" className="button button_red" onClick={() => removeStoryHandler(story.id)}>Remove</button>
+            </div>
+
           </div>
         ))}
       </div>

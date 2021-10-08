@@ -23,11 +23,12 @@ export default function ExcludingInit({ user }
     dispatch(StopExlude());
   }
   return (
-    <div>
-      <h2>
-        {`Are you sure about ${user.name} excluding? Please give a reason:`}
+    <div className="exclude-init">
+      <h2 className="exclude-init__title">
+        {`Do you really want to kick: ${user.name}? Please give a reason:`}
       </h2>
       <input
+        className="exclude-init__reason"
         type="text"
         value={reason}
         onChange={(e) => {
@@ -35,24 +36,28 @@ export default function ExcludingInit({ user }
           setReason(e.target.value);
         }}
       />
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          handleConfirm();
-        }}
-      >
-        Yes
-      </button>
-      <button
-        type="button"
-        onClick={async (e) => {
-          e.preventDefault();
-          await handleCancel();
-        }}
-      >
-        No
-      </button>
+      <div className="exclude-init__buttons">
+        <button
+          className="button button_green button_medium"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            handleConfirm();
+          }}
+        >
+          Yes
+        </button>
+        <button
+          className="button button_red button_medium"
+          type="button"
+          onClick={async (e) => {
+            e.preventDefault();
+            await handleCancel();
+          }}
+        >
+          No
+        </button>
+      </div>
     </div>
   );
 }

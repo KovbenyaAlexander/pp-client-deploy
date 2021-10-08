@@ -1,14 +1,26 @@
-.stories-container{
-  padding: 5px;
+.stories{
+  &-container{
+    padding: 5px;
+    height: 300px;
+    overflow-y: scroll;
+  }
 
+  &__controller{
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    width: 100%;
+    justify-content: space-around;
+    button{
+      height: 50px;
+      width: 200px;
+    }
+  }
 }
 
 .story{
   padding: 5px;
   margin: 2px;
   border: 1px solid grey;
-
-  &__name, &__description{
-    color: green;
-  }
+  border-radius: 10px;
 }

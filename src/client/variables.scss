@@ -1,7 +1,27 @@
-$buttonRed: #fc535f;
-$buttonRedHover: #fc535f;
-$buttonRedActive: #bb3f48;
+$mainRed: #F91E2E;
+$secondaryRed: #FC7E87;
+$activeRed: #BB3F48;
+$lightRed: #FC535F;
+$darkRed: #A20A15;
 
-$buttonGreen: #62ea4d;
-$buttonGreenHover: #62ea4d;
-$buttonGreenActive: #45a136;
+$mainGreen: #33D619;
+$secondaryGreen: #84EA74;
+$activeGreen: #45A136;
+$lightGreen: #62EA4D;
+$darkGreen: #1A8B08;
+
+$buttonRed: $mainRed;
+$buttonRedHover: $secondaryRed;
+$buttonRedActive: $activeRed;
+
+$buttonGreen: $mainGreen;
+$buttonGreenHover: $secondaryGreen;
+$buttonGreenActive: $activeGreen;
+
+$semiOpacityGrey: rgba(196, 196, 196, 0.41);
+$lightGrey: #E0E0E0;
+$semiOpacityDark: rgba(13, 13, 13, 0.58);
+
+$bigText: 72px;
+$mediumText: 36px;
+$commonText: 24px;

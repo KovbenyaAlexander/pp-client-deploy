@@ -126,90 +126,103 @@ export default function Settings(): JSX.Element {
     history.push(`/game/${game.id}`);
   };
 
+  const cancelGameHandler = () => {
+    dispatch(cancelGame());
+  };
+
   return (
     <>
       <form className="settings" onSubmit={onSettingsSubmitHandler}>
+
         <div className="settings__container">
+
           <span>Name of game</span>
           <input
             type="text"
             value={settings.gameName}
             onChange={(e) => setSettings({ ...settings, gameName: e.target.value })}
           />
-          {formValidation && <span className="settings__validation-error">name length must be more than 3 characters and less than 30</span>}
-          <br />
 
-          <span>Dealer in game</span>
-          <input
-            type="checkbox"
-            checked={settings.isDealerInGame}
-            onChange={(e) => setSettings({ ...settings, isDealerInGame: e.target.checked })}
-          />
+          {formValidation && <p className="settings__validation-error">name length must be more than 3 characters and less than 30</p>}
 
-          <br />
-
-          <span>Auto entry</span>
-          <input
-            type="checkbox"
-            checked={settings.isAutoEntry}
-            onChange={(e) => setSettings({ ...settings, isAutoEntry: e.target.checked })}
-          />
-
-          <br />
-
-          <span>Auto finish</span>
-          <input
-            type="checkbox"
-            checked={settings.isAutoFinish}
-            onChange={(e) => setSettings({ ...settings, isAutoFinish: e.target.checked })}
-          />
-
-          <br />
-
-          <span>Allow change vote</span>
-          <input
-            type="checkbox"
-            checked={settings.isVoteMutable}
-            onChange={(e) => setSettings({ ...settings, isVoteMutable: e.target.checked })}
-          />
-
-          <br />
-
-          <p>Estimation Type</p>
-          <label htmlFor="single">
-            Power of number 2
+          <div className="settings__item">
+            <span>Dealer in game</span>
             <input
-              type="radio"
-              name="Estimation"
-              id="PowerOf2"
-              checked={settings.estimationType === 'power2'}
-              onChange={() => setSettings({ ...settings, estimationType: 'power2' })}
+              className="settings__checkbox"
+              type="checkbox"
+              checked={settings.isDealerInGame}
+              onChange={(e) => setSettings({ ...settings, isDealerInGame: e.target.checked })}
             />
-          </label>
+          </div>
 
-          <br />
-
-          <label htmlFor="single">
-            Fibonacci numbers
+          <div className="settings__item">
+            <span>Auto entry</span>
             <input
-              type="radio"
-              name="Estimation"
-              id="Fibonacci"
-              checked={settings.estimationType === 'fibonacci'}
-              onChange={() => setSettings({ ...settings, estimationType: 'fibonacci' })}
+              className="settings__checkbox"
+              type="checkbox"
+              checked={settings.isAutoEntry}
+              onChange={(e) => setSettings({ ...settings, isAutoEntry: e.target.checked })}
+            />
+          </div>
+
+          <div className="settings__item">
+            <span>Auto finish</span>
+            <input
+              className="settings__checkbox"
+              type="checkbox"
+              checked={settings.isAutoFinish}
+              onChange={(e) => setSettings({ ...settings, isAutoFinish: e.target.checked })}
+            />
+          </div>
+
+          <div className="settings__item">
+            <span>Allow change vote</span>
+            <input
+              className="settings__checkbox"
+              type="checkbox"
+              checked={settings.isVoteMutable}
+              onChange={(e) => setSettings({ ...settings, isVoteMutable: e.target.checked })}
+            />
+          </div>
+
+          <div className="settings__estimation">
+            <p>Estimation Type</p>
+
+            <label htmlFor="PowerOf2" className="settings__estimation-item">
+              <span className="settings__estimation-description">Power of number 2</span>
+              <input
+                className="settings__estimation-input"
+                type="radio"
+                name="Estimation"
+                id="PowerOf2"
+                checked={settings.estimationType === 'power2'}
+                onChange={() => setSettings({ ...settings, estimationType: 'power2' })}
+              />
+            </label>
+
+            <label htmlFor="Fibonacci" className="settings__estimation-item">
+              <span className="settings__estimation-description">Fibonacci numbers</span>
+              <input
+                className="settings__estimation-input"
+                type="radio"
+                name="Estimation"
+                id="Fibonacci"
+                checked={settings.estimationType === 'fibonacci'}
+                onChange={() => setSettings({ ...settings, estimationType: 'fibonacci' })}
+              />
+            </label>
+          </div>
+
+          <div className="settings__item">
+            <span>Timer </span>
+            <input
+              className="settings__checkbox"
+              type="checkbox"
+              checked={settings.isTimerRequired}
+              onChange={(e) => setSettings({ ...settings, isTimerRequired: e.target.checked })}
 
             />
-          </label>
-
-          <br />
-
-          <span>Timer </span>
-          <input
-            type="checkbox"
-            checked={settings.isTimerRequired}
-            onChange={(e) => setSettings({ ...settings, isTimerRequired: e.target.checked })}
-
-          />
+          </div>
           <br />
           {settings.isTimerRequired
    && (
@@ -228,30 +241,34 @@ export default function Settings(): JSX.Element {
    )}
 
         </div>
-        <Stories
-          stories={settings.stories}
-          setSettings={setSettings}
-          setStoryToEdit={setStoryToEdit}
-          setShouldShowPopupForAdd={setShouldShowPopupForAdd}
-        />
+        <div className="settings__stories">
 
-        <button type="button" className="button button_red" onClick={() => setShouldShowPopupForAdd(true)}>Add story</button>
-        <div className="file-choose">
-          <label className="file-choose__file" htmlFor="file">
-            Load Stories
-            <input className="file-choose__input" type="file" accept=".json" id="file" onChange={onFileLoad} />
-          </label>
-          <p className="file-choose__tooltip">
-            Story must have name and could have description. Possible format: .json
-          </p>
+          <div className="settings__stories-controller">
+            <button type="button" className="button button_red" onClick={() => setShouldShowPopupForAdd(true)}>Add story</button>
+            <div className="file-choose">
+              <label className="file-choose-text button button_red" htmlFor="file">
+                Load Stories
+                <input className="file-choose__input" type="file" accept=".json" id="file" onChange={onFileLoad} />
+              </label>
+              <p className="file-choose__tooltip">
+                Story must have name and could have description. Possible format: .json
+              </p>
+            </div>
+          </div>
+
+          <Stories
+            stories={settings.stories}
+            setSettings={setSettings}
+            setStoryToEdit={setStoryToEdit}
+            setShouldShowPopupForAdd={setShouldShowPopupForAdd}
+          />
+
         </div>
-
-        <button type="button" className="button button_red" onClick={() => setShouldShowPopupForAdd(true)}>Add story</button>
-        <br />
-        {!storiesValidation && <p className="settings__validation-error">To start the game you must create at least one story</p>}
-
-        {!game.id && <button type="submit" className="button button_red">Create game</button>}
-        {game.isActive && <button type="submit" className="button button_red">Update game</button>}
+        <div className="settings__controller">
+          {!storiesValidation && <p className="settings__validation-error">To start the game you must create at least one story</p>}
+          {!game.id && <button type="submit" className="button button_red">Create game</button>}
+          {game.isActive && <button type="submit" className="button button_red">Update game</button>}
+        </div>
 
       </form>
 
@@ -264,9 +281,12 @@ export default function Settings(): JSX.Element {
       )}
 
       {game.id && (
-        <button type="button" onClick={gameActivitySwitcher} className="button button_red">
-          {game.isActive ? 'Pause game' : 'Start game'}
-        </button>
+        <div className="settings__launch">
+          <button type="button" onClick={gameActivitySwitcher} className="button button_red">
+            {game.isActive ? 'Pause game' : 'Start game'}
+          </button>
+          <button className="button button_green" type="button" onClick={cancelGameHandler}>Cancel game</button>
+        </div>
       )}
 
     </>

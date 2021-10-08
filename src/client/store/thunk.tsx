@@ -8,7 +8,6 @@ import {
 import { SocketApi } from '../socket/socket';
 
 const url = 'https://vast-peak-99290.herokuapp.com/api';
-
 export function createGame(settings: IGame) {
   return async (
     dispatch: ThunkDispatch<void, IStore, AnyAction>,

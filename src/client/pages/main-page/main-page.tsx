@@ -3,18 +3,19 @@ import React, {
 } from 'react';
 import uuid from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import axios from 'axios';
 import { LoginPopap } from '../../components/login-popap/login-popap';
 import { isGameActive } from '../../store/thunk';
 import { AppDispatch } from '../../types/middleware-types';
-import { UpdateUser } from '../../store/actions';
+import { AddUserImage, UpdateUser } from '../../store/actions';
 import { IStore } from '../../types/store-types';
 import './style.scss';
 
 const MainPage = (props: any): ReactElement => {
   const dispatch: AppDispatch = useDispatch();
   const { isActive, id } = useSelector((sel: IStore) => sel.game);
-  const { gameId }: any = props.match.params;
+  const { gameId } = useParams<{ gameId: string }>();
   const [keyID, setKeyID] = useState(gameId || '');
   const [shouldShowLogin, setShouldShowLogin] = useState(false);
   const [isGameFound, setIsGameFound] = useState<boolean | null>(null);
@@ -22,8 +23,17 @@ const MainPage = (props: any): ReactElement => {
   const history = useHistory();
 
   const onLoginDealer = useCallback(
-    (data) => {
-      dispatch(UpdateUser({ ...data, userID: uuid.v4() }));
+    async (data) => {
+      const photo = data.photoUser;
+      const sid = uuid.v4();
+      axios.post('https://vast-peak-99290.herokuapp.com/api/uploadPhoto', {
+        image: photo,
+        userID: sid,
+      }).then(() => {
+        dispatch(AddUserImage(sid, photo));
+      }).catch((e) => console.log(e));
+      data.photoUser = '';
+      dispatch(UpdateUser({ ...data, userID: sid }));
       history.push('settings');
     },
     [dispatch, history],
@@ -31,7 +41,16 @@ const MainPage = (props: any): ReactElement => {
 
   const onLoginPlayer = useCallback(
     (data) => {
-      dispatch(UpdateUser({ ...data, userID: uuid.v4() }));
+      const photo = data.photoUser;
+      const sid = uuid.v4();
+      axios.post('https://vast-peak-99290.herokuapp.com/api/uploadPhoto', {
+        image: photo,
+        userID: sid,
+      }).then(() => {
+        dispatch(AddUserImage(sid, photo));
+      }).catch((e) => console.log(e));
+      data.photoUser = '';
+      dispatch(UpdateUser({ ...data, userID: sid }));
       history.push(isActive ? `game/${keyID}` : `lobby/${keyID}`);
     },
     [dispatch, history, isActive, keyID],
@@ -93,7 +112,14 @@ const MainPage = (props: any): ReactElement => {
 
         <section className="main-page__new-game">
           <p className="main-page__description">Start on your own</p>
-          <button className="button button_green" type="button" onClick={onNewGame}>Create new game</button>
+          <button
+            className="button button_green"
+            type="button"
+            onClick={onNewGame}
+          >
+            Create new game
+
+          </button>
         </section>
 
         <div className="main-page__separator-wrapper">
@@ -111,7 +137,7 @@ const MainPage = (props: any): ReactElement => {
               placeholder="Input id for the game"
             />
             <button type="submit" className="button button_red">
-              Play
+              Join to Game
             </button>
 
             {isGameFound === false && <p>Game not found</p>}

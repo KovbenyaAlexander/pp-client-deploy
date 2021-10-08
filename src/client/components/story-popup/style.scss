@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .story-popup {
   width: 100%;
   height: 100%;
@@ -5,23 +7,25 @@
   display: flex;
   justify-content: center;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  padding: 20px;
   background: rgba($color: #000000, $alpha: 0.5);
 
   &-wrapper {
-    width: 500px;
-    height: 350px;
+    width: 66%;
+    height: 66%;
     margin-top: 5rem;
-    border-radius: 10px;
-    background-color: white;
+    border-radius: 2px;
+    border: 5px solid;
+    background-color: #F4F4F4;
   }
 
   &__validation-error {
     position: relative;
     bottom: 0;
-    color: red;
+    color: $mainRed;
   }
 
   &__name {

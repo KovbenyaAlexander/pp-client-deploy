@@ -1,25 +1,31 @@
+@import '../../variables.scss';
+
 .main-page {
   &__logo-container{
     font-family: 'Rock Salt';
-    font-size: 35px;
     margin: 30px;
   }
 
   &__logo{
     display: inline;
+    font-family: 'Rock Salt';
+    font-size: $bigText;
   }
 
   &__logo-red{
     display: inline;
-    color: red
+    font-family: 'Rock Salt';
+    font-size: $bigText;
+    color: $mainRed;
   }
 
   &__wrapper {
-    width: 50%;
-    min-width: 500px;
+    min-width: 300px;
     margin: 0 auto;
     height: 100%;
     margin-top: 10px;
+    padding: 0 40px;
+    
   }
 
   &__separator {
@@ -29,25 +35,38 @@
   }
 
   &__connect {
-    display: flex;
-    justify-content: flex-end;
+
+    &-input{
+      width: 480px;
+      margin-bottom: 20px;
+    }
+
+    form{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
   }
 
   &__separator{
     font-family: 'Rock Salt';
+    font-size: 48px;
     display: inline;
     &-wrapper{
       display: flex;
       justify-content: center;
     }
     &-red{
-      color: red
+      color: $mainRed;
     }
   }
 
   &__description{
-    font-size: 25px;
+    font-size: $mediumText;
     font-family: "Ubuntu", sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
   }
 }
 

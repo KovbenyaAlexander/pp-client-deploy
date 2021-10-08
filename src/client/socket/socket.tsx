@@ -20,6 +20,9 @@ import {
   onSocketAddStory,
   onSocketUpdateStories,
   onSocketFinishGame,
+  onSocketUserImage,
+  onSocketaskAboutImages,
+  onSocketChatHistory,
 } from './socket-actions';
 
 export class SocketApi implements ISocketApi {
@@ -67,6 +70,9 @@ export class SocketApi implements ISocketApi {
     this.socket.on('setStory', onSocketUpdateStories);
     this.socket.on('finishStory', onSocketUpdateStories);
     this.socket.on('finishGame', onSocketFinishGame);
+    this.socket.on('addUserImage', onSocketUserImage);
+    this.socket.on('askAboutImages', onSocketaskAboutImages);
+    this.socket.on('chatHistory', onSocketChatHistory);
   }
 
   initExclude(excludeObj: IExclude | undefined, isDealer: boolean): void {
@@ -86,6 +92,11 @@ export class SocketApi implements ISocketApi {
   sendMessage(message: string, authorMessage: string): void {
     const { game, user } = store.getState();
     this.socket.emit('sendMessage', game.id, user.userID, message, authorMessage);
+  }
+
+  sendImagesRequest(diff: string[]): void {
+    const { game, user } = store.getState();
+    this.socket.emit('requestImages', game.id, user.userID, diff);
   }
 
   // Game Actions

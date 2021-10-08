@@ -11,15 +11,17 @@ import Chat from '../../components/chat/chat';
 import { IStore } from '../../types/store-types';
 import { isDealer } from '../../utils';
 import './style.scss';
+import WrappedName from '../../components/wrappedName/wrappedName';
 
 export default function Lobby(): JSX.Element {
   const { game, user } = useSelector((state: IStore) => state);
   const dealer = user ? isDealer(game, user.userID) : false;
+  const name = game.settings.gameName;
 
   return (
     <article className="lobby">
       <h3 className="lobby__title">
-        {game.excluding.IsYouExcluded ? 'Game Ends for You' : `Waiting for start game ${game.settings.gameName}`}
+        {game.excluding.IsYouExcluded ? 'Game Ends for You' : <WrappedName name={name} /> }
       </h3>
       {game.excluding.IsYouExcluded ? <MessageForExcluded /> : (
         <section className="lobby__chat">

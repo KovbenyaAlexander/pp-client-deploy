@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .member{
   position: relative;
   display: flex;
@@ -7,31 +9,39 @@
   width: 100%;
   max-width: 300px;
   margin: 5px 0;
+  margin-bottom: 50px;
   padding: 5px;
-  border: 1px solid;
-  border-radius: 5px;
+  border: 5px solid $mainGreen;
+  border-radius: 2px;
 
   &__name{
-    margin: 0 5px;
+    margin: 0 10px;
+    text-shadow: 0 0 2px $mainGreen;
   }
 
   &__special{
     position: absolute;
-    top: -10px;
-    right: -5px;
+    bottom: -5px;
+    left: -5px;
+    transform: translate(0, 100%);
+    width: 30%;
     padding: 5px;
-    border: 1px solid;
-    border-radius: 5px;
-    font-size: .8rem;
+    border: 5px solid $mainRed;
+    border-radius: 2px;
+    font-size: 15px;
     font-weight: normal;
     text-transform: capitalize;
+    color: $mainRed;
+    background: transparent;
+  }
 
-    &_dealer{
-      background: rgb(110 148 243);
-    }
-
-    &_observer{
-      background: rgb(110 148 243);
-    }
+  .button {
+    position: absolute;
+    right: 0;
+    transform: translate(105%);
+    width: 20%;
+    height: 80px;
+    padding: 0;
+    font-size: 24px;
   }
 }

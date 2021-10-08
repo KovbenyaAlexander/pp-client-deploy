@@ -1,4 +1,6 @@
-.login_popap{
+@import '../../variables.scss';
+
+.login_popup{
   width: 100%;
   height: 100%;
 
@@ -10,38 +12,100 @@
   left: 0;
   background: rgba($color: #000000, $alpha: 0.5);
 
-  &-wrapper {
-    height: 350px;
-    margin-top: 5rem;
-    padding: 3rem 1rem;
-    border-radius: 10px;
-    background-color: white;
-    form{
-      .photo_user-wrapper {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          border: 2px solid black;
-          label{
-            cursor: pointer;
-          }
-  
-          img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+  font-family: "Ubuntu", sans-serif;
 
-          }
+  &__form-wrapper{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__photo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid $mainGreen;
+
+    &_non::before{
+      content: 'A';
+      position: absolute;
+      top: 0;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 10%);
+      font-size: $bigText;
+      z-index: 1;
+    }
+
+    &-text{
+      position: relative;
+      top: 120px;
+      right: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 0 0 2px $mainGreen;
+    }
+
+    label{
+      cursor: pointer;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  .btn_wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__inputs{
+    width: 250px;
+    input{
+      width: 100%;
+      margin: 5px auto;
+    }
+  }
+
+  &__button{
+    margin-top: 20px;
+    width: 100px;
+  }
+
+  &__observer{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
     
-        input {
-          display: none;
-        }
-      }
-      .btn_wrapper {
-        display: flex;
-        justify-content: space-between;
-      }
+    &--container{
+      display: flex;
+      justify-content: center;
     }
     
+    &__checkbox{
+      display: none;
+    }
+    .checkbox_custom{
+      width: 50px;
+      height: 50px;
+      border: 5px solid $mainGreen;
+      border-radius: 2px;
+    }
+
+    &__checkbox:checked ~ .checkbox_custom{
+      background-color: $mainGreen;
+    }
+
+    span{
+      margin-left: 10px;
+    }
   }
 }

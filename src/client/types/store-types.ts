@@ -49,6 +49,12 @@ export interface IGame {
   settings: ISettings;
   isCompleted: boolean;
 }
+
+export interface IUserImage {
+  id: string,
+  image: string;
+}
+
 export interface IStore {
   user: IUserInfo;
   game: IGame;
@@ -57,6 +63,7 @@ export interface IStore {
     messages: Array<IChatMessage>
   };
   loading: boolean;
+  usersImages: IUserImage[];
 }
 
 export interface ISocketApi {
@@ -73,6 +80,7 @@ export interface ISocketApi {
   setStory: (s: string) => void;
   finishStory: (r: number | string) => void;
   finishGame: (r: IStory[] | number | string) => void;
+  sendImagesRequest: (s: string[]) => void;
 }
 
 export interface IChatMessage {
