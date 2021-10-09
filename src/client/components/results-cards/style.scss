@@ -6,6 +6,10 @@
   .card{
     width: 30px;
     height: 50%;
+
+    p {
+      font-size: 17px;
+    }
   }
 
   &__card{
@@ -14,4 +18,8 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.result-card__value{
+  font-size: 17px;
 }

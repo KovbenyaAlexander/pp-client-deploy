@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { IStory, IStore } from '../../types';
 import './style.scss';
@@ -14,24 +14,26 @@ export default function ActiveStory(): JSX.Element {
   if (activeStory) {
     return (
       <div className="active-story">
-        <h3>Active story</h3>
-        <p>
-          name:
-          {activeStory.name}
-        </p>
-        <p>
-          description:
-          {activeStory.description}
-        </p>
-        <hr />
+        <h3 className="active-story__title">Active story</h3>
+        <table>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td>{activeStory.name}</td>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td>{activeStory.description}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }
 
   return (
-    <>
-      <p className="active-story">no active story</p>
-      <hr />
-    </>
+    <div className="active-story">
+      <h3 className="active-story__title">No chosen story</h3>
+    </div>
   );
 }

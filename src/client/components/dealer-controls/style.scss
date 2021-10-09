@@ -1,0 +1,14 @@
+.dealer-controls{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 35px;
+
+  .dealer-controls__start-round, .dealer-controls__stop-round{
+    width: 50%;
+  }
+
+  .button{
+    height: 40px;
+    font-size: 17px;
+  }
+}

@@ -43,8 +43,22 @@ export const Stories = ({
             )}
 
             <div className="stories__controller">
-              <button type="button" className="button button_red" onClick={() => editStoryHandler(story)}>Edit</button>
-              <button type="button" className="button button_red" onClick={() => removeStoryHandler(story.id)}>Remove</button>
+              <button
+                type="button"
+                className="button button_green"
+                onClick={() => editStoryHandler(story)}
+              >
+                Edit
+
+              </button>
+              <button
+                type="button"
+                className="button button_red"
+                onClick={() => removeStoryHandler(story.id)}
+              >
+                Remove
+
+              </button>
             </div>
 
           </div>

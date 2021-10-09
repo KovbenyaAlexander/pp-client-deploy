@@ -1,11 +1,45 @@
+@import '../../variables.scss';
+
 .game__stories{
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
 
+  &__header{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    width: 100%;
+
+    .game__stories__title{
+      font-size: $mediumText;
+    }
+
+    .button{
+      height: 40px;
+      width: 30%;
+    }
+  }
+}
+
+table{
+  border: 5px solid $mainGreen;
+  border-collapse: collapse;
+  width: 90%;
+  margin: 10px auto;
+
+  td{
+    border: 5px solid $mainGreen;
+    text-align: center;
+    font-size: 17px;
+  }
+
   .button{
-    bottom: 0;
-    left: 50%;
+    width: 80%;
+    height: 100%;
+    font-size: 17px;
   }
 }

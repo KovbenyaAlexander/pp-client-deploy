@@ -9,6 +9,14 @@
 
   &__container { 
     height: 100px;
+
+    .game-name{
+      margin-left: 10px;
+      padding: 5px 0;
+      padding-left: 10px;
+      border-radius: 2px;
+      border: 1px solid $lightGrey;
+    }
   }
 
   &__stories { 
@@ -16,6 +24,7 @@
       display: flex;
       justify-content: space-around;
       margin-bottom: 15px;
+      margin-top: 50px;
     }
   }
   
@@ -24,6 +33,22 @@
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+
+    .settings__checkbox{
+      display: none;
+    }
+
+    .custom-checkbox{
+      width: 30px;
+      height: 30px;
+      border: 5px solid $mainRed;
+      border-radius: 2px;
+    }
+
+    .settings__checkbox:checked ~ .custom-checkbox{
+      background-color: $mainRed;
+    }
+    
   }
   
   input{
@@ -35,14 +60,46 @@
   }
 
   &__estimation{
-    padding: 15px;
     display: flex;
     flex-direction: column;
+    margin: 10px 0;
+
     &-item{
-      width: 367px;
+      width: 310px;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
+      margin: 10px 0;
+      margin-left: 40px;
+
+      .settings__estimation-input{
+        display: none;
+      }
+      .custom-radio{
+        position: relative;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 5px solid $mainRed;
+      }
+
+      .custom-radio__checker{
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $mainRed;
+      }
+
+      .settings__estimation-input:checked ~ .custom-radio {
+        .custom-radio__checker{
+          display: block;
+        }
+      }
     }
   }
 
@@ -119,6 +176,10 @@
     text-shadow: 0 0 2px $mainGreen;
     width: 350px !important;
   }
+}
+
+.settings__controller{
+  margin-top: 40px;
 }
 
 

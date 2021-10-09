@@ -32,7 +32,7 @@ export default function Launch(): JSX.Element {
           <div className="launch__item">
             <p>GameId:</p>
             <div className="launch__item-wrapper">
-              <input value={id} />
+              <input className="input-launch" value={id} />
               <CopyToClipboard
                 text={id}
               >
@@ -44,7 +44,10 @@ export default function Launch(): JSX.Element {
           <div className="launch__item">
             <p>Game Link:</p>
             <div className="launch__item-wrapper">
-              <input value={`https://kovbenyaalexander.github.io/pp-client-deploy/#/connect/${id}`} />
+              <input
+                className="input-launch"
+                value={`https://kovbenyaalexander.github.io/pp-client-deploy/#/connect/${id}`}
+              />
               <CopyToClipboard
                 text={`https://kovbenyaalexander.github.io/pp-client-deploy/#/connect/${id}`}
               >

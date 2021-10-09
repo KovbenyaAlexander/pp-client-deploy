@@ -48,10 +48,11 @@ export default function Member({ member } : { member: IUserInfo }): JSX.Element 
             Kick
           </button>
         ) }
+        {
+          game.isActive && <Score member={member} />
+        }
       </li>
-      {
-        game.isActive && <Score member={member} />
-      }
+
     </>
   );
 }

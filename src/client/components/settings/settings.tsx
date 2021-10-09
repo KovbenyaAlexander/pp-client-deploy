@@ -139,51 +139,61 @@ export default function Settings(): JSX.Element {
           <span>Name of game</span>
           <input
             type="text"
+            className="game-name"
             value={settings.gameName}
             onChange={(e) => setSettings({ ...settings, gameName: e.target.value })}
           />
 
-          {formValidation && <p className="settings__validation-error">name length must be more than 3 characters and less than 30</p>}
+          {formValidation
+          && <p className="settings__validation-error">name length must be more than 3 characters and less than 30</p>}
 
-          <div className="settings__item">
+          <label htmlFor="dealer-in-game" className="settings__item">
             <span>Dealer in game</span>
             <input
               className="settings__checkbox"
               type="checkbox"
+              id="dealer-in-game"
               checked={settings.isDealerInGame}
               onChange={(e) => setSettings({ ...settings, isDealerInGame: e.target.checked })}
             />
-          </div>
+            <div className="custom-checkbox">{' '}</div>
+          </label>
 
-          <div className="settings__item">
+          <label htmlFor="auto-entry-opt" className="settings__item">
             <span>Auto entry</span>
             <input
               className="settings__checkbox"
               type="checkbox"
+              id="auto-entry-opt"
               checked={settings.isAutoEntry}
               onChange={(e) => setSettings({ ...settings, isAutoEntry: e.target.checked })}
             />
-          </div>
+            <div className="custom-checkbox">{' '}</div>
+          </label>
 
-          <div className="settings__item">
+          <label htmlFor="auto-finish-opt" className="settings__item">
             <span>Auto finish</span>
             <input
               className="settings__checkbox"
               type="checkbox"
+              id="auto-finish-opt"
               checked={settings.isAutoFinish}
               onChange={(e) => setSettings({ ...settings, isAutoFinish: e.target.checked })}
             />
-          </div>
+            <div className="custom-checkbox">{' '}</div>
+          </label>
 
-          <div className="settings__item">
+          <label htmlFor="allow-change-opt" className="settings__item">
             <span>Allow change vote</span>
             <input
               className="settings__checkbox"
               type="checkbox"
+              id="allow-change-opt"
               checked={settings.isVoteMutable}
               onChange={(e) => setSettings({ ...settings, isVoteMutable: e.target.checked })}
             />
-          </div>
+            <div className="custom-checkbox">{' '}</div>
+          </label>
 
           <div className="settings__estimation">
             <p>Estimation Type</p>
@@ -198,6 +208,9 @@ export default function Settings(): JSX.Element {
                 checked={settings.estimationType === 'power2'}
                 onChange={() => setSettings({ ...settings, estimationType: 'power2' })}
               />
+              <div className="custom-radio">
+                <div className="custom-radio__checker">{' '}</div>
+              </div>
             </label>
 
             <label htmlFor="Fibonacci" className="settings__estimation-item">
@@ -210,19 +223,24 @@ export default function Settings(): JSX.Element {
                 checked={settings.estimationType === 'fibonacci'}
                 onChange={() => setSettings({ ...settings, estimationType: 'fibonacci' })}
               />
+              <div className="custom-radio">
+                <div className="custom-radio__checker">{' '}</div>
+              </div>
             </label>
           </div>
 
-          <div className="settings__item">
+          <label htmlFor="timer-opt" className="settings__item">
             <span>Timer </span>
             <input
               className="settings__checkbox"
               type="checkbox"
+              id="timer-opt"
               checked={settings.isTimerRequired}
               onChange={(e) => setSettings({ ...settings, isTimerRequired: e.target.checked })}
 
             />
-          </div>
+            <div className="custom-checkbox">{' '}</div>
+          </label>
           <br />
           {settings.isTimerRequired
    && (
@@ -244,7 +262,14 @@ export default function Settings(): JSX.Element {
         <div className="settings__stories">
 
           <div className="settings__stories-controller">
-            <button type="button" className="button button_red" onClick={() => setShouldShowPopupForAdd(true)}>Add story</button>
+            <button
+              type="button"
+              className="button button_green"
+              onClick={() => setShouldShowPopupForAdd(true)}
+            >
+              Add story
+
+            </button>
             <div className="file-choose">
               <label className="file-choose-text button button_red" htmlFor="file">
                 Load Stories
@@ -265,7 +290,8 @@ export default function Settings(): JSX.Element {
 
         </div>
         <div className="settings__controller">
-          {!storiesValidation && <p className="settings__validation-error">To start the game you must create at least one story</p>}
+          {!storiesValidation
+          && <p className="settings__validation-error">To start the game you must create at least one story</p>}
           {!game.id && <button type="submit" className="button button_red">Create game</button>}
           {game.isActive && <button type="submit" className="button button_red">Update game</button>}
         </div>

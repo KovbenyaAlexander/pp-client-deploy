@@ -49,38 +49,52 @@ export default function GameStories(): JSX.Element {
 
   return (
     <div className="game__stories">
+      <div className="game__stories__header">
+        <h3 className="game__stories__title">Stories</h3>
+        {user.role === 'dealer' && (
+          <button
+            className="button button_red button_medium"
+            type="button"
+            onClick={addStoryHandler}
+          >
+            Add
+          </button>
+        )}
+      </div>
       <ActiveStory />
       {game.settings.stories.map((story: IStory) => (
-        <div key={story.id}>
-          <p>
-            name:
-            {story.name}
-          </p>
-          <p>
-            description:
-            {story.description}
-          </p>
-          {user.role === 'dealer' && !game.isRoundActive && !story.estimation && (
-            <button
-              type="button"
-              onClick={() => chooseStoryHandler(story)}
-            >
-              {' '}
-              Choose this story
-            </button>
-          )}
-          {story.isCompleted ? (
-            <p>
-              {' '}
-              Estimation:
-              {story.estimation}
-            </p>
-          ) : <p> Task is not completed</p>}
-          <hr />
-        </div>
-      ))}
+        story.isActive ? (<div key={story.id} />) : (
+          <table className="game-story" key={story.id}>
+            <tbody>
+              <tr className="game-story__name story-name">
+                <td className="story-name__title">Name</td>
+                <td className="story-name__name">{story.name}</td>
+              </tr>
+              {story.isCompleted ? (
+                <tr className="story-estimation">
+                  <td><img width="50" src="./battery-100.png" alt="unfinished" /></td>
+                  <td className="story-estimation__estimation">{story.estimation}</td>
+                </tr>
+              ) : <></> }
+              {user.role === 'dealer' && !game.isRoundActive && !story.estimation && (
+                <tr>
+                  <td><img width="50" src="./battery-0.png" alt="unfinished" /></td>
+                  <td>
+                    <button
+                      className="button button_red button_medium"
+                      type="button"
+                      onClick={() => chooseStoryHandler(story)}
+                    >
+                      Choose
+                    </button>
+                  </td>
+                </tr>
 
-      {user.role === 'dealer' && <button type="button" onClick={addStoryHandler}>Add story</button>}
+              )}
+            </tbody>
+          </table>
+        )
+      ))}
 
       {shouldShowPopupForAdd && (
         <StoryPopup

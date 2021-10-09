@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import GameResultsTable from '../../components/game-results-table/game-results-table';
+import { setInitialStore } from '../../store/actions';
 import { IStore, IStory } from '../../types';
 import './style.scss';
 
@@ -9,6 +10,7 @@ export default function ResultsPage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const game = useSelector((state: IStore) => state.game);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!id || !game.id) history.push('/');
@@ -23,9 +25,13 @@ export default function ResultsPage(): JSX.Element {
     return url;
   }
 
+  function returnToMain(): void {
+    dispatch(setInitialStore());
+  }
+
   return (
     <article className="results-page">
-      <h2 className="results-page__header">Results</h2>
+      <h2 className="results-page__title">Results</h2>
       <table>
         <thead>
           <tr>
@@ -39,13 +45,17 @@ export default function ResultsPage(): JSX.Element {
           {game.settings.stories.map((story) => <GameResultsTable key={story.id} story={story} />)}
         </tbody>
       </table>
-      <a
-        href={generateCsv(game.settings.stories)}
-        download={`${game.settings.gameName || 'result'}.csv`}
-      >
-        Download Results
+      <div className="results-page__buttons">
+        <a
+          className="button button_green "
+          href={generateCsv(game.settings.stories)}
+          download={`${game.settings.gameName || 'result'}.csv`}
+        >
+          Download Results
 
-      </a>
+        </a>
+        <button type="button" className="button button_red" onClick={returnToMain}>Back to Main</button>
+      </div>
     </article>
   );
 }

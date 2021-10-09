@@ -12,6 +12,7 @@
   left: 0;
   padding: 20px;
   background: rgba($color: #000000, $alpha: 0.5);
+  z-index: 999;
 
   &-wrapper {
     width: 66%;

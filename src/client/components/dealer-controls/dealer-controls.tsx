@@ -51,7 +51,7 @@ export default function DealerControls(): JSX.Element {
     <div className="dealer-controls">
       <button
         type="button"
-        className="button dealer-controls__start-round"
+        className="button dealer-controls__start-round button_green"
         onClick={onRoundStart}
         disabled={isRoundActive}
       >
@@ -59,7 +59,7 @@ export default function DealerControls(): JSX.Element {
       </button>
       <button
         type="button"
-        className="button dealer-controls__stop-round"
+        className="button dealer-controls__stop-round button_red"
         onClick={onRoundStop}
         disabled={!isRoundActive}
       >
@@ -68,13 +68,20 @@ export default function DealerControls(): JSX.Element {
       {activeStory && (
         <button
           type="button"
-          className="button dealer-controls__finish-story"
+          className="button dealer-controls__finish-story button_green"
           onClick={onFinishStory}
         >
           Finish Story
         </button>
       )}
-      <button type="button" className="button dealer-controls__finish-game" onClick={onFinishGame}>Finish Game</button>
+      <button
+        type="button"
+        className="button dealer-controls__finish-game button_red"
+        onClick={onFinishGame}
+      >
+        Finish Game
+
+      </button>
     </div>
   );
 }
